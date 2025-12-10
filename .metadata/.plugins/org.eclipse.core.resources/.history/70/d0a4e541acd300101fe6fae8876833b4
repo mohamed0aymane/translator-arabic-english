@@ -1,0 +1,22 @@
+package org.mql.generative.ai.controllers;
+
+import org.mql.generative.ai.services.TranslationService;
+import org.mql.generative.ai.models.TranslationRequest;
+import org.mql.generative.ai.models.TranslationResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/translate")
+@CrossOrigin(origins = "http://localhost:3000")
+public class TranslationController {
+
+    @Autowired
+    private TranslationService translationService;
+
+    @PostMapping
+    public TranslationResponse translate(@RequestBody TranslationRequest request) {
+        String result = translationService.translate(request.getText());
+        return new TranslationResponse(result);
+    }
+}

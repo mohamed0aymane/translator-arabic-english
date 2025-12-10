@@ -1,0 +1,3 @@
+spring.application.name=translation-backend
+server.port=8080
+gemini.api.key=AIzaSyBcta0Qm4OyHN8-yJyQ6oMoPkhTy9nC3xo

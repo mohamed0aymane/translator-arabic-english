@@ -1,0 +1,89 @@
+package org.mql.generative.ai.services;
+
+import org.mql.generative.ai.models.TranslationRequest;
+import org.mql.generative.ai.models.TranslationResponse;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
+
+@Service
+public class TranslationService {
+
+    @Value("${gemini.api.key}")
+    private String apiKey;
+    
+    @Value("${gemini.api.url}")
+    private String apiUrl;
+
+    private static final HttpClient http = HttpClient.newBuilder()
+            .connectTimeout(Duration.ofSeconds(10))
+            .build();
+
+    private static final ObjectMapper mapper = new ObjectMapper();
+
+    public TranslationResponse translate(TranslationRequest request) {
+        try {
+        	String url = apiUrl + "?key=" + apiKey;
+
+            String payload = """
+                    {
+                        "contents": [{
+                            "parts": [{
+                                "text": "Translate this text into Moroccan Darija. Return ONLY the translation: %s"
+                            }]
+                        }]
+                    }
+                    """.formatted(request.getText());
+
+            HttpRequest httpRequest = HttpRequest.newBuilder()
+                    .uri(new URI(url))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(payload))
+                    .build();
+
+            HttpResponse<String> response =
+                    http.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+
+            String body = response.body();
+
+            // -------------------------
+            // Parse JSON de manière sûre
+            // -------------------------
+            JsonNode json = mapper.readTree(body);
+            
+            if (json.has("error")) {
+                return new TranslationResponse("Erreur : pas de contenu dans le candidat");
+            }
+
+            JsonNode candidates = json.get("candidates");
+            if (candidates == null || candidates.isEmpty()) {
+                return new TranslationResponse("Erreur : pas de contenu dans le candidat");
+            }
+            JsonNode textNode = candidates.get(0)
+                    .get("content")
+                    .get("parts")
+                    .get(0)
+                    .get("text");
+
+            String translatedText = textNode.asText()
+                    .replace("\n", "")   
+                    .replace("\r", "")   
+                    .trim();  
+
+           
+
+            return new TranslationResponse(translatedText);
+
+        } catch (Exception e) {
+            return new TranslationResponse("Erreur lors de la traduction : " + e.getMessage());
+        }
+    }
+}

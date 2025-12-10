@@ -1,0 +1,7 @@
+spring.application.name=translation-backend
+server.port=8080
+# Clé API Gemini
+gemini.api.key=AIzaSyBcta0Qm4OyHN8-yJyQ6oMoPkhTy9nC3xo
+
+# URL du modèle Gemini Flash 2.0
+gemini.api.url=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent

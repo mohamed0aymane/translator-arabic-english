@@ -1,0 +1,57 @@
+.dashboard-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 35px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+
+  border: 1px solid rgba(0, 200, 255, 0.2);
+  box-shadow: 0 0 25px rgba(0, 200, 255, 0.3);
+
+  animation: neonPulse 3s infinite ease-in-out;
+}
+
+.dashboard-container h2 {
+  text-align: center;
+  font-size: 32px;
+  color: #58d0ff;
+  letter-spacing: 1px;
+  margin-bottom: 25px;
+  text-shadow: 0 0 10px rgba(0, 200, 255, 0.6);
+}
+
+/* BUTTONS */
+.translate-btn,
+.clear-btn {
+  padding: 14px 25px;
+  margin: 8px;
+  border: none;
+  border-radius: 14px;
+  font-size: 17px;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.translate-btn {
+  background: linear-gradient(135deg, #0099ff, #00ddff);
+  color: white;
+  box-shadow: 0 0 10px rgba(0, 200, 255, 0.6);
+}
+
+.translate-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 18px rgba(0, 200, 255, 1);
+}
+
+.clear-btn {
+  background: linear-gradient(135deg, #ff004c, #ff0058);
+  color: white;
+  box-shadow: 0 0 10px rgba(255, 0, 80, 0.6);
+}
+
+.clear-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 18px rgba(255, 0, 80, 1);
+}

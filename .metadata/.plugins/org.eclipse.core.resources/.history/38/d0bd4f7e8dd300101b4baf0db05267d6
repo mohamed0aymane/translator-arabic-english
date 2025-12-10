@@ -1,0 +1,51 @@
+package org.mql.generative.ai.services;
+
+import org.mql.generative.ai.models.TranslationRequest;
+import org.mql.generative.ai.models.TranslationResponse;
+import org.springframework.stereotype.Service;
+
+import java.util.Random;
+
+@Service
+public class TranslationService {
+
+    // Mode mock pour le développement
+    private static final boolean USE_MOCK = true;
+
+    // Tableau de phrases Darija génériques pour simulation
+    private static final String[] MOCK_PHRASES = {
+            "Salam, labas 3lik?",
+            "Sb7 l-khir",
+            "Chnou khbarak?",
+            "Ana mzyan, shukran",
+            "Bslama"
+    };
+
+    private final Random random = new Random();
+
+    public TranslationResponse translate(TranslationRequest request) {
+        if (USE_MOCK) {
+            String text = request.getText();
+
+            // Cas connus pour traductions précises
+            String mockTranslation = switch (text.toLowerCase()) {
+                case "hello, how are you?" -> "Salam, labas 3lik?";
+                case "good morning" -> "Sb7 l-khir";
+                case "goodbye" -> "Bslama";
+                default -> generateMockTranslation(text);
+            };
+
+            return new TranslationResponse(mockTranslation);
+        }
+
+        // Code réel pour appeler Gemini (désactivé ici)
+        return new TranslationResponse("Fonction réelle non implémentée pour l'instant");
+    }
+
+    // Génère une pseudo-traduction Darija pour tout autre texte
+    private String generateMockTranslation(String text) {
+        // On mélange le texte original avec une phrase Darija aléatoire
+        String phrase = MOCK_PHRASES[random.nextInt(MOCK_PHRASES.length)];
+        return phrase + " (simulé pour: \"" + text + "\")";
+    }
+}

@@ -1,0 +1,5 @@
+package org.mql.generative.ai.services;
+
+public class TranslationService {
+
+}

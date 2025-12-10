@@ -1,0 +1,5 @@
+package org.mql.generative.ai.controllers;
+
+public class TranslationController {
+
+}

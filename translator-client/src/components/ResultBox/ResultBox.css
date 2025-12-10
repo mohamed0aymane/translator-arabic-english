@@ -1,0 +1,58 @@
+.result-title {
+  margin-top: 25px;
+  font-size: 22px;
+  color: #00d5ff;
+  text-shadow: 0 0 10px rgba(0, 200, 255, 0.7);
+}
+
+.result-text {
+  margin-top: 10px;
+  padding: 18px;
+  font-size: 18px;
+
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(8px);
+  border-radius: 14px;
+
+  border: 1px solid rgba(0, 200, 255, 0.2);
+  color: #f0f9ff;
+}
+
+.result-info {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  color: #8ceaff;
+}
+
+.copy-btn,
+.audio-btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: 8px;
+  border: none;
+}
+
+.copy-btn {
+  background: linear-gradient(135deg, #b700ff, #ff00ea);
+  color: white;
+  box-shadow: 0 0 10px rgba(200, 0, 255, 0.7);
+}
+
+.copy-btn:hover {
+  transform: scale(1.07);
+  box-shadow: 0 0 18px rgba(200, 0, 255, 1);
+}
+
+.audio-btn {
+  background: linear-gradient(135deg, #007bff, #00c3ff);
+  color: white;
+  box-shadow: 0 0 10px rgba(0, 150, 255, 0.7);
+}
+
+.audio-btn:hover {
+  transform: scale(1.07);
+  box-shadow: 0 0 18px rgba(0, 150, 255, 1);
+}

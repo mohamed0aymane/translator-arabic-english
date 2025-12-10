@@ -1,0 +1,30 @@
+package org.mql.generative.ai.controllers;
+
+
+import org.mql.generative.ai.models.TranslationRequest;
+import org.mql.generative.ai.models.TranslationResponse;
+import org.mql.generative.ai.services.TranslationService;
+
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/translate")
+@CrossOrigin(origins = "http://localhost:3030")
+public class TranslationController {
+
+    @Autowired
+    private TranslationService translationService;
+
+    @POST
+    @Path("/translate")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response translate(TranslateRequest request) {
+        String result = service.translate(request.getText());
+        return Response.ok(new TranslateResponse(result)).build();
+    }
+}
