@@ -1,5 +1,6 @@
 import React from "react";
 import "./ResultBox.css";
+import { FiVolume2 } from "react-icons/fi";
 
 export default function ResultBox({ result, copy, speak }) {
   if (!result) return null;
@@ -17,9 +18,10 @@ export default function ResultBox({ result, copy, speak }) {
           <button className="copy-btn" onClick={copy}>Copy</button>
 
            {result.length > 0 && (
-          <button className="audio-btn" onClick={() => speak(result, "ar")}>
-            Listen
-          </button>
+         <button className="audio-btn" onClick={() => speak(result, "ar")} title="Listen to the translation">
+  <FiVolume2 size={20} />
+        </button>
+
 
         )}
           

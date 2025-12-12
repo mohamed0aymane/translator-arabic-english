@@ -55,3 +55,24 @@
   transform: scale(1.05);
   box-shadow: 0 0 18px rgba(255, 0, 80, 1);
 }
+.audio-record-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px; /* espace entre icône et texte */
+  background: linear-gradient(135deg, #ffb700, #ff4500);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  box-shadow: 0 0 10px rgba(255, 100, 0, 0.7);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.audio-record-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 18px rgba(255, 100, 0, 1);
+}
+

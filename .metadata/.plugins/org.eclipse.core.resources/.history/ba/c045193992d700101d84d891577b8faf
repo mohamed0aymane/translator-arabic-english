@@ -1,0 +1,37 @@
+package org.mql.generative.ai.security;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import java.util.Date;
+import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.SignatureAlgorithm;
+import java.security.Key;
+
+
+@Component
+public class JwtUtil {
+
+    @Value("${jwt.secret}")
+    private String secret;
+
+    @Value("${jwt.expiration}")
+    private long expiration;
+    private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+
+    public String generateToken(String username) {
+        return io.jsonwebtoken.Jwts.builder()
+                .setSubject(username)
+                .signWith(key) // clé sécurisée automatiquement
+                .compact();
+    }
+
+    public String extractUsername(String token) {
+        return Jwts.parser().setSigningKey(secret)
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
+    }
+}
